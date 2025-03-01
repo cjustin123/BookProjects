@@ -1,0 +1,15 @@
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/bin/Debug/net8.0/TheDefenseOfConsolas
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/bin/Debug/net8.0/TheDefenseOfConsolas.deps.json
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/bin/Debug/net8.0/TheDefenseOfConsolas.runtimeconfig.json
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/bin/Debug/net8.0/TheDefenseOfConsolas.dll
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/bin/Debug/net8.0/TheDefenseOfConsolas.pdb
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/obj/Debug/net8.0/TheDefenseOfConsolas.GeneratedMSBuildEditorConfig.editorconfig
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/obj/Debug/net8.0/TheDefenseOfConsolas.AssemblyInfoInputs.cache
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/obj/Debug/net8.0/TheDefenseOfConsolas.AssemblyInfo.cs
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/obj/Debug/net8.0/TheDefenseOfConsolas.csproj.CoreCompileInputs.cache
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/obj/Debug/net8.0/TheDefenseOfConsolas.sourcelink.json
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/obj/Debug/net8.0/TheDefenseOfConsolas.dll
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/obj/Debug/net8.0/refint/TheDefenseOfConsolas.dll
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/obj/Debug/net8.0/TheDefenseOfConsolas.pdb
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/obj/Debug/net8.0/TheDefenseOfConsolas.genruntimeconfig.cache
+/Users/justinbeam/CSharpPlayersGuide/TheDefenseOfConsolas/obj/Debug/net8.0/ref/TheDefenseOfConsolas.dll
