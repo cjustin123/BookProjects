@@ -97,7 +97,25 @@ int itemPrice = menuItem switch
     "Canoe" => 200,
     "Food Supplies" => 1
 };
+// Yellow Menu
+Console.BackgroundColor = ConsoleColor.Yellow;
+Console.ForegroundColor = ConsoleColor.Black;
+Console.Write("Your name?");
+// Color Correction
+Console.ForegroundColor = ConsoleColor.White;
+Console.BackgroundColor = ConsoleColor.Black;
+string name = Console.ReadLine();
+
+
 Console.BackgroundColor = ConsoleColor.Cyan;
 Console.ForegroundColor = ConsoleColor.Black;
-Console.Write($"{menuItem} costs {itemPrice} gold.");
+if (name == "assmonkeysupreme")
+{
+    Console.Write($"{menuItem} costs {itemPrice/2} gold.");
+}
+else 
+{
+    Console.Write($"{menuItem} costs {itemPrice} gold.");
+}
+
 Console.ReadKey();
