@@ -19,3 +19,42 @@ Console.Write("Y value: ");
 Console.BackgroundColor = ConsoleColor.Black;
 Console.ForegroundColor = ConsoleColor.White;
 int _yValue = Convert.ToInt32(Console.ReadLine());
+
+Console.BackgroundColor = ConsoleColor.Yellow;
+Console.ForegroundColor = ConsoleColor.Black;
+if (_yValue > 0 && _xValue < 0)
+{
+    Console.Write("The enemy is to the northwest!");
+}
+else if (_yValue == 0 && _xValue < 0)
+{
+    Console.Write("The enemy is to the west!");
+}
+else if (_yValue < 0 && _xValue < 0)
+{
+    Console.Write("The enemy is to the southwest!");
+}
+else if (_yValue > 0 && _xValue ==0)
+{
+    Console.Write("The enemy is to the north!");
+}
+else if (_yValue == 0 && _xValue == 0)
+{
+    Console.Write("!!!!!!!!!!!!!!!!!!!!!");
+}
+else if (_yValue < 0 && _xValue == 0)
+{
+    Console.Write("The enemy is to the south!");
+}
+else if (_yValue > 0 && _xValue > 0)
+{
+    Console.Write("The enemy is to the northeast!");
+}
+else if (_yValue == 0 && _xValue > 0)
+{
+    Console.Write("The enemy is to the east!");
+}
+else if (_yValue < 0 && _xValue > 0)
+{
+    Console.Write("The enemy is to the southeast!");
+}
