@@ -43,6 +43,7 @@ public class Map
         }
 
     }
+    ///////////////////////////////////////////////////////////////////
     public void DisplayMap()
     {
         for (int x = 0; x < RoomArray.GetLength(0); x++)
