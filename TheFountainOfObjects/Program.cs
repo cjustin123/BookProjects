@@ -1,24 +1,30 @@
-﻿Console.BackgroundColor = ConsoleColor.White;
-Console.ForegroundColor = ConsoleColor.Black;
-Console.Write("HI WORL");
-Console.BackgroundColor = ConsoleColor.Black;
-Console.WriteLine(" ");
-Map _map = new Map();
-_map.DisplayMap();
-Console.ReadKey();
+﻿
 
 
 
 
+Game _game;
+_game = new Game();
+_game.Run();
 
 
-/// END OF TOP LEVEL STATEMENT/ PROGRAM.MAIN() FUNCTION
+public class Game
+{
+    Map _map = new Map();
+
+    public void Run()
+    {
+        _map.DisplayMap();
+    }
+}
+
+public record Position { public int x; public int y; } //MAKE A STRUCT
 public enum RoomType { Entrance, Fountain, Empty }
-
 
 public class Room
 {
     public RoomType RoomType { get; private set; }
+    public Position Position { get; private set; }
 }
 public class Map
 {
@@ -35,6 +41,7 @@ public class Map
                 RoomArray[x, y] = RoomType.Empty;
             }
         }
+
     }
     public void DisplayMap()
     {
@@ -43,22 +50,19 @@ public class Map
             Console.WriteLine("");
             for (int y = 0; y < RoomArray.GetLength(1); y++)
             {
-                Console.BackgroundColor = ConsoleColor.White;
-                Console.Write(RoomArray[x, y]);
 
+                Console.Write(RoomArray[x, y]);
                 if (y == RoomArray.GetLength(1) - 1)
                 {
-                    Console.BackgroundColor = ConsoleColor.Black;
+
                     continue;
                 }
                 else
                 {
-
                     Console.Write(", ");
-                    Console.BackgroundColor = ConsoleColor.Black;
                 }
             }
         }
     }
-    
 }
+    
