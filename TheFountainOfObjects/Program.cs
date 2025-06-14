@@ -1,29 +1,37 @@
-﻿
+﻿using System.Runtime.CompilerServices;
 
-using System.Runtime.CompilerServices;
 
 Game _game;
-Player _player;
 _game = new Game();
-_player = new Player();
+
 _game.Run();
 
 
 public class Game
 {
     Map _map = new Map();
+    Player _player = new Player();
     bool _isFountainActive = false;
 
     public void Run()
-    {
-        _map.DisplayMap();
+    {        
+
+        while (_player.IsAlive)
+        {
+            Console.WriteLine($"Current Position: ({_player.Position.X}, {_player.Position.Y})");
+            _map.DisplayMap();
+            Console.ReadLine();
+        }
     }
 }
 public class Player
 {
     private Position _position;
+    public Position Position { get => _position; }
+    public bool IsAlive { get; private set; }
     public Player()
     {
+        IsAlive = true;
         _position = new Position();
         _position.X = 0;
         _position.Y = 0;
