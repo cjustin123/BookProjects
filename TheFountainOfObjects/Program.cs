@@ -1,7 +1,11 @@
 ﻿
 
+using System.Runtime.CompilerServices;
+
 Game _game;
+Player _player;
 _game = new Game();
+_player = new Player();
 _game.Run();
 
 
@@ -13,6 +17,16 @@ public class Game
     public void Run()
     {
         _map.DisplayMap();
+    }
+}
+public class Player
+{
+    private Position _position;
+    public Player()
+    {
+        _position = new Position();
+        _position.X = 0;
+        _position.Y = 0;
     }
 }
 
@@ -46,6 +60,18 @@ public class Map
         RoomArray = new Room[Size, Size];
         BuildLevel();
 
+    }
+    public bool IsValidPosition(int x, int y)
+    {
+        if (x >= Size || x < 0)
+        {
+            return false;
+        }
+        if (y >= Size || y < 0)
+        {
+            return false;
+        }
+        return true;
     }
     private void BuildLevel()
     {
