@@ -11,22 +11,33 @@ public class Game
 {
     Map _map = new Map();
     Player _player = new Player();
+    
     bool _isFountainActive = false;
 
     public void Run()
-    {        
+    {
+
+        _player.Map = _map;
+
 
         while (_player.IsAlive)
         {
-            Console.WriteLine($"Current Position: ({_player.Position.X}, {_player.Position.Y})");
-            _map.DisplayMap();
+            Console.Clear();
+            // Player checks senses of current room
+            Console.WriteLine($"Current Position: ({_player.Position.X}, {_player.Position.Y})");// UI class method
+
+            _map.DisplayMap(_player.Position);
+            //Process player input
+            _player.MoveNorth();
             Console.ReadLine();
         }
     }
 }
+
 public class Player
 {
     private Position _position;
+    public Map Map;
     public Position Position { get => _position; }
     public bool IsAlive { get; private set; }
     public Player()
@@ -36,8 +47,37 @@ public class Player
         _position.X = 0;
         _position.Y = 0;
     }
+
+
+    //turn into one method, passing in a value to switch over
+    public void MoveNorth()
+    {
+        //is valid position check
+        _position.X += 1;
+    }
+    public void MoveSouth()
+    {
+        _position.X -= 1;
+    }
+    public void MoveEast()
+    {
+        _position.Y += 1;
+    }
+    public void MoveWest()
+    {
+        _position.Y -= 1;
+    }
 }
 
+public class PlayerInput
+{
+
+}
+
+public interface ISenses
+{
+    public void Sense();
+}
 public struct Position { public int X, Y; }
 public enum RoomType { Entrance, Fountain, Empty, Wall }
 
@@ -114,7 +154,7 @@ public class Map
         }
     }
     ///////////////////////////////////////////////////////////////////
-    public void DisplayMap()
+    public void DisplayMap(Position playerPosition)
     {
         // MAKE IT DISPLAY Y AXIS IN REVERSE ORDER
         for (int x = 0; x < RoomArray.GetLength(0); x++)
@@ -122,8 +162,16 @@ public class Map
             Console.WriteLine("");
             for (int y = 0; y < RoomArray.GetLength(1); y++)
             {
+                if (RoomArray[x,y].Position.Equals(playerPosition))
+                {
+                    Console.Write("PLAYER");
+                }
+                else
+                {
+                    Console.Write(RoomArray[x, y].RoomType + $"({x}, {y})");
+                }
+                    
 
-                Console.Write(RoomArray[x, y].RoomType + $"({x}, {y})");
                 if (y == RoomArray.GetLength(1) - 1)
                 {
 
@@ -131,7 +179,7 @@ public class Map
                 }
                 else
                 {
-                    Console.Write(", ");
+                    Console.Write("| ");
                 }
             }
         }
