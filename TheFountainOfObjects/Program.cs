@@ -62,8 +62,6 @@ public class Player
         _position.Y = 0;
     }
 
-
-    //turn into one method, passing in a value to switch over
     public void MoveNorth()
     {
         //is valid position check
@@ -190,7 +188,13 @@ public class MoveCommand : IPlayerCommand
         }
     }
 }
+public class EnableFountainCommand : IPlayerCommand
+{
+    public void ExecuteCommand()
+    {
 
+    }
+}
 public struct Position { public int X, Y; }
 public enum RoomType { Entrance, Fountain, Empty, Wall }
 public enum Direction { North, South, East, West}
