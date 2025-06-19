@@ -17,15 +17,15 @@ public class Game
     public void Run()
     {
 
-        _player.Map = _map;
+        _player._map = _map;
 
 
         while (_player.IsAlive)
         {
-            Console.Clear();
+            //Console.Clear();
             // Player checks senses of current room
-            Console.WriteLine($"Current Position: ({_player.Position.X}, {_player.Position.Y})");// UI class method
-
+            //Console.WriteLine($"Current Position: ({_player.Position.X}, {_player.Position.Y})");// UI class method
+            UIManager.HeaderText(_player);
             _map.DisplayMap(_player.Position);
             //Process player input
             _player.MoveNorth();
@@ -33,11 +33,24 @@ public class Game
         }
     }
 }
-
+public class UIManager
+{
+    public static void HeaderText(Player player)
+    {
+        Console.BackgroundColor = ConsoleColor.Yellow;
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.Write($"Current Position: ({player.Position.X}, {player.Position.Y})");
+        Console.BackgroundColor = ConsoleColor.Black;
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("");
+        Console.BackgroundColor = ConsoleColor.Black;
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+}
 public class Player
 {
     private Position _position;
-    public Map Map;
+    public Map _map;
     public Position Position { get => _position; }
     public bool IsAlive { get; private set; }
     public Player()
@@ -52,20 +65,32 @@ public class Player
     //turn into one method, passing in a value to switch over
     public void MoveNorth()
     {
-        //is valid position check
-        _position.X += 1;
+       if ( _map.IsValidPosition(Position.X + 1, Position.Y))
+        {
+            _position.X += 1;
+        }
+        
     }
     public void MoveSouth()
     {
-        _position.X -= 1;
+        if (_map.IsValidPosition(Position.X + 1, Position.Y))
+        {
+            _position.X -= 1;
+        }
     }
     public void MoveEast()
     {
-        _position.Y += 1;
+        if (_map.IsValidPosition(Position.X + 1, Position.Y))
+        {
+            _position.Y += 1;
+        }
     }
     public void MoveWest()
     {
-        _position.Y -= 1;
+        if (_map.IsValidPosition(Position.X + 1, Position.Y))
+        {
+            _position.Y -= 1;
+        }
     }
 }
 
