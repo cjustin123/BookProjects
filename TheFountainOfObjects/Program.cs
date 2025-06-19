@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System;
 
 
 Game _game;
@@ -11,25 +12,25 @@ public class Game
 {
     Map _map = new Map();
     Player _player = new Player();
-    
+    PlayerInput? _playerInput;
     bool _isFountainActive = false;
 
     public void Run()
     {
 
-        _player._map = _map;
-
+        _player.Map = _map;
+        _playerInput = new PlayerInput(_player);
 
         while (_player.IsAlive)
         {
             //Console.Clear();
             // Player checks senses of current room
-            //Console.WriteLine($"Current Position: ({_player.Position.X}, {_player.Position.Y})");// UI class method
-            UIManager.HeaderText(_player);
+            Console.WriteLine($"Current Position: ({_player.Position.X}, {_player.Position.Y})");// UI class method
+            Console.WriteLine($"Room: {_map.RoomArray[_player.Position.X, _player.Position.Y].RoomType}");
             _map.DisplayMap(_player.Position);
             //Process player input
-            _player.MoveNorth();
-            Console.ReadLine();
+            string playerInput = Console.ReadLine();
+            _playerInput.Update(playerInput.ToLower());
         }
     }
 }
@@ -50,7 +51,7 @@ public class UIManager
 public class Player
 {
     private Position _position;
-    public Map _map;
+    public Map? Map;
     public Position Position { get => _position; }
     public bool IsAlive { get; private set; }
     public Player()
@@ -65,47 +66,134 @@ public class Player
     //turn into one method, passing in a value to switch over
     public void MoveNorth()
     {
-       if ( _map.IsValidPosition(Position.X + 1, Position.Y))
+        //is valid position check
+        if (Map.IsValidPosition(Position.X + 1, Position.Y))
         {
             _position.X += 1;
         }
-        
+        else
+        {
+            Console.Clear();
+            Console.WriteLine("You hit a wall.");
+            Console.ReadKey();
+        }
     }
     public void MoveSouth()
     {
-        if (_map.IsValidPosition(Position.X + 1, Position.Y))
+        if (Map.IsValidPosition(Position.X - 1, Position.Y))
         {
             _position.X -= 1;
+        }
+        else
+        {
+            Console.Clear();
+            Console.WriteLine("You hit a wall.");
+            Console.ReadKey();
         }
     }
     public void MoveEast()
     {
-        if (_map.IsValidPosition(Position.X + 1, Position.Y))
+        if (Map.IsValidPosition(Position.X, Position.Y + 1))
         {
             _position.Y += 1;
+        }
+         else
+        {
+            Console.Clear();
+            Console.WriteLine("You hit a wall.");
+            Console.ReadKey();
         }
     }
     public void MoveWest()
     {
-        if (_map.IsValidPosition(Position.X + 1, Position.Y))
+        if (Map.IsValidPosition(Position.X, Position.Y - 1))
         {
             _position.Y -= 1;
+        }
+         else
+        {
+            Console.Clear();
+            Console.WriteLine("You hit a wall.");
+            Console.ReadKey();
         }
     }
 }
 
+
 public class PlayerInput
 {
+    private Player _player;
+    IPlayerCommand? playerCommand;
+    public PlayerInput(Player player)
+    {
+        _player = player;
+    }
 
+    public void Update(string userInput)
+    {
+        
+        switch (userInput)
+        {
+            case "move north":
+                playerCommand = new MoveCommand(_player, Direction.North);
+                break;
+            case "move south":
+                playerCommand = new MoveCommand(_player, Direction.South);
+                break;
+            case "move east":
+                playerCommand = new MoveCommand(_player, Direction.East);
+                break;
+            case "move west":
+                playerCommand = new MoveCommand(_player, Direction.West);
+                break;
+            case "avtivate fountain":
+                break;
+            default:
+                break;
+        }
+        playerCommand?.ExecuteCommand();
+    }
 }
 
-public interface ISenses
+public interface IPlayerCommand
 {
-    public void Sense();
+    public void ExecuteCommand();
 }
+public class MoveCommand : IPlayerCommand
+{
+    private Player _player;
+    private Direction _direction;
+    public MoveCommand(Player player, Direction direction)
+    {
+        _player = player;
+        _direction = direction;
+    }
+
+    public void ExecuteCommand()
+    {
+        switch (_direction)
+        {
+            case Direction.North:
+                _player.MoveNorth();
+                break;
+            case Direction.South:
+                _player.MoveSouth();
+                break;
+            case Direction.East:
+                _player.MoveEast();
+                break;
+            case Direction.West:
+                _player.MoveWest();
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 public struct Position { public int X, Y; }
 public enum RoomType { Entrance, Fountain, Empty, Wall }
-
+public enum Direction { North, South, East, West}
 public class Room
 {
     public RoomType North, South, East, West;
@@ -115,6 +203,7 @@ public class Room
         Position.X = x;
         Position.Y = y;
     }
+
     public RoomType RoomType { get; private set; }
     public readonly Position Position;
 
