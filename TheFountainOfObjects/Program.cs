@@ -47,6 +47,7 @@ public class Game
             // Player checks senses of current room
             Console.WriteLine($"Current Position: ({_player.Position.X}, {_player.Position.Y})");// UI class method
             Console.WriteLine($"Room: {_map.RoomArray[_player.Position.X, _player.Position.Y].RoomType}");
+            _player.UpdateSenses();
             if (_isFountainActive)
             {
                 Console.WriteLine("Objective Achieved!");
@@ -85,7 +86,28 @@ public class Player
         _position.X = 0;
         _position.Y = 0;
     }
-
+    public void UpdateSenses()
+    {
+        switch(Map.RoomArray[Position.X,Position.Y].RoomType)
+        {
+            case RoomType.Entrance:
+                Console.WriteLine("You can see the light from outside. This must be the entrance.");
+                break;
+            case RoomType.Fountain:
+                if (Game.Instance.IsFountainActive)
+                {
+                    Console.WriteLine("You hear the rushing waters of The Founatin of Objects. The Fountain has been activated!");
+                }
+                else
+                {
+                    Console.WriteLine("You hear something dripping. This must be where The Fountain of Objects is.");
+                }
+                break;
+            default:
+                Console.WriteLine("Advanced darkness.");
+                break;
+        }
+    }
     public void MoveNorth()
     {
         //is valid position check
