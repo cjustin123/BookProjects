@@ -15,6 +15,7 @@ public class Game
     Player _player = new Player();
     PlayerInput? _playerInput;
     bool _isFountainActive = false;
+    public bool IsFountainActive { get => _isFountainActive; }
     public static Game Instance;
 
     public Game()
@@ -42,10 +43,14 @@ public class Game
 
         while (_player.IsAlive)
         {
-            //Console.Clear();
+            Console.Clear();
             // Player checks senses of current room
             Console.WriteLine($"Current Position: ({_player.Position.X}, {_player.Position.Y})");// UI class method
             Console.WriteLine($"Room: {_map.RoomArray[_player.Position.X, _player.Position.Y].RoomType}");
+            if (_isFountainActive)
+            {
+                Console.WriteLine("Objective Achieved!");
+            }
             _map.DisplayMap(_player.Position);
             //Process player input
             string playerInput = Console.ReadLine();
@@ -167,6 +172,7 @@ public class PlayerInput
                 playerCommand = new EnableFountainCommand();
                 break;
             default:
+                playerCommand = null;
                 break;
         }
         playerCommand?.ExecuteCommand();
@@ -213,16 +219,6 @@ public class EnableFountainCommand : IPlayerCommand
     public void ExecuteCommand()
     {
         Game.Instance.EnableFountain();
-/*        if (Game.Instance._map.RoomArray[Game.Instance._player.Position.X, Game.Instance_player.Position.Y].RoomType == RoomType.Fountain)
-        {
-            Game.Instance._isFountainActive = true;
-        }
-        else
-        {
-            Console.Clear();
-            Console.WriteLine("The Fountain Of Objects is not in this room.");
-            Console.ReadKey();
-        }*/
     }
 }
 public struct Position { public int X, Y; }
