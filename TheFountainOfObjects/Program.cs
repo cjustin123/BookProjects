@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using System;
+using System.ComponentModel;
 
 
 Game _game;
@@ -14,7 +15,25 @@ public class Game
     Player _player = new Player();
     PlayerInput? _playerInput;
     bool _isFountainActive = false;
+    public static Game Instance;
 
+    public Game()
+    {
+        Instance = this;
+    }
+    public void EnableFountain()
+    {
+        if (_map.RoomArray[_player.Position.X, _player.Position.Y].RoomType == RoomType.Fountain)
+        {
+            _isFountainActive = true;
+        }
+        else
+        {
+            Console.Clear();
+            Console.WriteLine("The Fountain Of Objects is not in this room.");
+            Console.ReadKey();
+        }
+    }
     public void Run()
     {
 
@@ -144,7 +163,8 @@ public class PlayerInput
             case "move west":
                 playerCommand = new MoveCommand(_player, Direction.West);
                 break;
-            case "avtivate fountain":
+            case "activate fountain":
+                playerCommand = new EnableFountainCommand();
                 break;
             default:
                 break;
@@ -192,7 +212,17 @@ public class EnableFountainCommand : IPlayerCommand
 {
     public void ExecuteCommand()
     {
-
+        Game.Instance.EnableFountain();
+/*        if (Game.Instance._map.RoomArray[Game.Instance._player.Position.X, Game.Instance_player.Position.Y].RoomType == RoomType.Fountain)
+        {
+            Game.Instance._isFountainActive = true;
+        }
+        else
+        {
+            Console.Clear();
+            Console.WriteLine("The Fountain Of Objects is not in this room.");
+            Console.ReadKey();
+        }*/
     }
 }
 public struct Position { public int X, Y; }
