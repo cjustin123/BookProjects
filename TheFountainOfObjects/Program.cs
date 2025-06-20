@@ -37,6 +37,7 @@ public class Game
     }
     public void Run()
     {
+        Console.WriteLine("easy, medium, or hard mode?");
 
         _player.Map = _map;
         _playerInput = new PlayerInput(_player);
@@ -256,10 +257,11 @@ public class Map
     public int Size { get; private set; } = 4;
 
     public Room[,] RoomArray;
-    public Map()
+    public Map(int size)
     {
+        Size = size;
         RoomArray = new Room[Size, Size];
-        BuildLevel();
+        //BuildLevel();
 
     }
     public bool IsValidPosition(int x, int y)
@@ -274,7 +276,7 @@ public class Map
         }
         return true;
     }
-    private void BuildLevel()
+    public void BuildLevel()
     {
         // fountain placement
         Random rnd = new Random();
