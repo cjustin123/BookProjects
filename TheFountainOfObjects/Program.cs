@@ -59,20 +59,7 @@ public class Game
         }
     }
 }
-public class UIManager
-{
-    public static void HeaderText(Player player)
-    {
-        Console.BackgroundColor = ConsoleColor.Yellow;
-        Console.ForegroundColor = ConsoleColor.Black;
-        Console.Write($"Current Position: ({player.Position.X}, {player.Position.Y})");
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("");
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.ForegroundColor = ConsoleColor.White;
-    }
-}
+
 public class Player
 {
     private Position _position;
