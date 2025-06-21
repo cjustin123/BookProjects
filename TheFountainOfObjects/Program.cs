@@ -11,7 +11,11 @@ _game.Run();
 
 public class Game
 {
-    Map _map = new Map();
+    const int SMALL = 3;
+    const int MEDIUM = 4;
+    const int LARGE = 5;
+
+    Map _map = new Map(LARGE);
     Player _player = new Player();
     PlayerInput? _playerInput;
     bool _isFountainActive = false;
@@ -37,7 +41,6 @@ public class Game
     }
     public void Run()
     {
-        Console.WriteLine("easy, medium, or hard mode?");
 
         _player.Map = _map;
         _playerInput = new PlayerInput(_player);
@@ -254,14 +257,14 @@ public class Room
 }
 public class Map
 {
-    public int Size { get; private set; } = 4;
+    public int Size { get; private set; }
 
     public Room[,] RoomArray;
     public Map(int size)
     {
         Size = size;
         RoomArray = new Room[Size, Size];
-        //BuildLevel();
+        BuildLevel();
 
     }
     public bool IsValidPosition(int x, int y)
