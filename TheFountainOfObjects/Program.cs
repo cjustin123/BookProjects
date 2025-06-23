@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel;
 
-
+Console.Clear();
 Game _game;
 _game = new Game();
 
@@ -15,7 +15,7 @@ public class Game
     const int MEDIUM = 4;
     const int LARGE = 5;
 
-    Map _map = new Map(LARGE);
+    Map _map;
     Player _player = new Player();
     PlayerInput? _playerInput;
     bool _isFountainActive = false;
@@ -24,6 +24,24 @@ public class Game
 
     public Game()
     {
+        Console.WriteLine("small, medium, large?");
+        string selection = Console.ReadLine();
+        switch (selection.ToLower())
+        {
+            case "small":
+                _map = new Map(SMALL);
+                break;
+            case "medium":
+                _map = new Map(MEDIUM);
+                break;
+            case "large":
+                _map = new Map(LARGE);
+                break;
+            default:
+                _map = new Map(MEDIUM);
+                break;
+
+        }
         Instance = this;
     }
     public void EnableFountain()
@@ -235,7 +253,7 @@ public class EnableFountainCommand : IPlayerCommand
     }
 }
 public struct Position { public int X, Y; }
-public enum RoomType { Entrance, Fountain, Empty, Wall }
+public enum RoomType { Entrance, Fountain, Empty, Wall, Pit }
 public enum Direction { North, South, East, West}
 public class Room
 {
@@ -301,6 +319,10 @@ public class Map
                 else if (x == 0 && y == 0)
                 {
                     newRoom.SetRoomType(RoomType.Entrance);
+                }
+                else if (rnd.Next(1,4) == 1) // WTF!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                {
+                    newRoom.SetRoomType(RoomType.Pit);
                 }
                 else
                 {
