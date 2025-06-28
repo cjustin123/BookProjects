@@ -297,6 +297,7 @@ public class Map
         }
         return true;
     }
+    
     public void BuildLevel()
     {
         // fountain placement
@@ -305,7 +306,7 @@ public class Map
         int fountainY = rnd.Next(1, Size);
         Position fountainPosition = new Position();
         fountainPosition.X = fountainX;
-        fountainPosition .Y = fountainY;
+        fountainPosition.Y = fountainY;
 
         for (int x = 0; x < RoomArray.GetLength(0); x++)
         {
@@ -320,7 +321,7 @@ public class Map
                 {
                     newRoom.SetRoomType(RoomType.Entrance);
                 }
-                else if (rnd.Next(1,4) == 1) // WTF!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                else if (rnd.Next(1, 4) == 1) // WTF!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 {
                     newRoom.SetRoomType(RoomType.Pit);
                 }
@@ -328,7 +329,7 @@ public class Map
                 {
                     newRoom.SetRoomType(RoomType.Empty);
                 }
-                
+
                 RoomArray[x, y] = newRoom;
             }
         }
